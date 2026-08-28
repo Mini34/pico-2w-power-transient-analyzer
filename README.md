@@ -6,7 +6,7 @@ A Raspberry Pi Pico 2 W electrical-engineering instrument that combines calibrat
 
 ## Current status
 
-The five-mode integrated prototype and dashboard were verified on hardware before this repository update. The new Source Test invalid-fit guard is covered by host-side synthetic tests and still needs a final on-device recheck; negative fitted source resistance is now rejected rather than accepted as a physical result.
+The five-mode integrated prototype and dashboard were verified on hardware before this repository update. The new Source Test invalid-fit guard is covered by host-side synthetic tests and still needs a final on-device recheck; negative fitted source resistance is now rejected rather than accepted as a physical result. The repository uses the official generic MicroPython SSD1306 driver as a user-approved replacement for the unavailable Pico-side copy; this exact replacement has not been rechecked on the stored-away hardware.
 
 ## Implemented modes
 
@@ -78,8 +78,10 @@ firmware/
   experiment_logger.py
   fault_monitor.py
   source_characterizer.py
-  ssd1306.py  # exact Pico-side driver export still required
+  ssd1306.py
 ```
+
+The display driver is MicroPython's generic `ssd1306` package, pinned and attributed in [`firmware/THIRD_PARTY_NOTICES.md`](firmware/THIRD_PARTY_NOTICES.md).
 
 Do not commit Wi-Fi credentials. Keep local credential files ignored and provide only an example/template if the firmware requires one.
 
