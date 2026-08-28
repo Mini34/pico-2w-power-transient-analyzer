@@ -1,0 +1,565 @@
+{
+  "schema_version": "1.0",
+  "generated_at_local": "2026-08-27",
+  "project": {
+    "project_name": "Pico 2 W EE Lab Tool",
+    "repository": "Mini34/pico-2w-power-transient-analyzer",
+    "repository_default_branch": "main",
+    "updated_local_date": "2026-08-27",
+    "status": "Working integrated prototype; firmware and dashboard verified; source-test fit validation remains open.",
+    "controller": "Raspberry Pi Pico 2 W",
+    "runtime": "MicroPython",
+    "display": "128x64 SSD1306-compatible OLED at I2C address 0x3C",
+    "power_sensor": "INA219 at I2C address 0x40 with nominal 0.1 ohm R100 shunt",
+    "i2c": {
+      "implementation": "SoftI2C",
+      "sda": "GP6",
+      "scl": "GP7",
+      "frequency_hz": 50000
+    },
+    "load": "10 ohm, 100 W, J (5%) aluminum power resistor",
+    "calibration": {
+      "voltage_equation": "V_cal = 0.98896 * V_raw - 0.03531 V",
+      "fit_r_squared": 0.999975,
+      "accepted_residual_scale": "approximately +/-3 mV",
+      "current_scale_correction": null,
+      "current_validation": "30.1-30.2 mV across R100 -> approximately 0.301-0.302 A while INA219 reported approximately 0.300 A"
+    },
+    "pin_assignments": {
+      "GP0": "RC capacitor charge",
+      "GP1": "RC transistor control / discharge path",
+      "GP2": "menu/select button, active low",
+      "GP3": "diode test source / PWM sweep drive",
+      "GP6": "I2C SDA",
+      "GP7": "I2C SCL",
+      "GP26_ADC0": "RC capacitor voltage",
+      "GP27_ADC1": "diode source-side voltage",
+      "GP28_ADC2": "diode forward voltage",
+      "ADC4": "RP2350 internal temperature sensor"
+    },
+    "modes": [
+      "Power / Energy Monitor",
+      "RC Analyzer",
+      "Diode Analyzer (single test and display-only I-V sweep)",
+      "MCU Temperature",
+      "Guided Source Test"
+    ],
+    "software_services": [
+      "Wi-Fi manager and HTTP dashboard",
+      "shared instrument state",
+      "experiment logger",
+      "fault monitor",
+      "source characterizer",
+      "CSV/JSON exports"
+    ],
+    "validated_examples": {
+      "power": {
+        "voltage_v": 2.996,
+        "current_a": 0.469,
+        "power_w": 1.404,
+        "charge_mAh": 9.7,
+        "energy_Wh": 0.0292,
+        "elapsed_s": 103,
+        "min_voltage_v": 2.992,
+        "max_voltage_v": 3.301,
+        "peak_current_a": 0.469,
+        "peak_power_w": 1.405,
+        "avg_voltage_v": 3.064,
+        "avg_current_a": 0.361,
+        "avg_power_w": 1.086
+      },
+      "rc": {
+        "tau_s_range": [
+          1.076,
+          1.079
+        ],
+        "capacitance_uF_range": [
+          1076,
+          1079
+        ]
+      },
+      "diode_silicon": {
+        "classification": "SILICON",
+        "forward_voltage_v": 0.662,
+        "current_mA": 7.09,
+        "source_voltage_v": 3.0
+      },
+      "diode_schottky": {
+        "device": "1N5819",
+        "classification": "SCHOTTKY",
+        "forward_voltage_v": 0.248,
+        "current_mA": 8.2,
+        "source_voltage_v": 2.954
+      },
+      "mcu_temperature": {
+        "stable_test_c_range": [
+          45.53,
+          45.68
+        ],
+        "adc_voltage_v_range": [
+          0.6739,
+          0.6741
+        ],
+        "raw_range": [
+          13630,
+          13635
+        ],
+        "dashboard_range_c": [
+          41.25,
+          46.02
+        ],
+        "reference_voltage_v": 3.24
+      },
+      "source_test_invalid_example": {
+        "voc_v": -0.003,
+        "source_resistance_ohm": -6.395,
+        "r_squared": 1.0,
+        "points": 3,
+        "status": "invalid / requires workflow and data-quality validation"
+      }
+    }
+  },
+  "milestones": [
+    {
+      "phase": "Hardware bring-up and soldering",
+      "work": "Soldered Pico and INA219 headers, recovered from oxidized-tip and breadboard/contact issues, and established stable power and ground rails.",
+      "evidence": [
+        "Pico 3V3 measured approximately 3.22-3.26 V",
+        "Shared I2C bus ultimately detected both devices"
+      ],
+      "decision": "Continue with GP6/GP7 shared I2C and preserve one-step-at-a-time physical verification."
+    },
+    {
+      "phase": "I2C and module diagnosis",
+      "work": "Separated communication faults from measurement faults. A scan returned [60, 64], proving OLED 0x3C and INA219 0x40 communication.",
+      "evidence": [
+        "First INA219 produced implausible bus voltage despite valid current",
+        "Third tested module produced realistic bus-voltage data"
+      ],
+      "decision": "Reject defective/noncompliant modules rather than calibrating around hardware failure."
+    },
+    {
+      "phase": "Power-monitor calibration and wiring integrity",
+      "work": "Moved from a 500 ohm load to a 10 ohm, 100 W load, quantified real connection losses, implemented star grounding, and fitted the voltage calibration.",
+      "evidence": [
+        "Ground-reference error reduced from approximately 86 mV to approximately 0.2 mV",
+        "Positive-path drop reduced from approximately 0.39 V to approximately 0.076 V using three parallel temporary jumpers",
+        "Voltage fit R^2 approximately 0.999975"
+      ],
+      "decision": "Treat parasitic resistance as a physical circuit element; do not calibrate it away."
+    },
+    {
+      "phase": "Current-channel verification",
+      "work": "Rejected an inconsistent multimeter 10 A range result and measured directly across the INA219 R100 shunt.",
+      "evidence": [
+        "30.1-30.2 mV across 0.1 ohm implies approximately 0.301-0.302 A",
+        "INA219 simultaneously reported approximately 0.300 A"
+      ],
+      "decision": "No software current scale factor is justified."
+    },
+    {
+      "phase": "Power and energy analyzer",
+      "work": "Extended the Power Monitor with charge and energy integration, minimum/peak statistics, running averages, elapsed time, OLED pages, dashboard state, and end-of-session logging.",
+      "evidence": [
+        "Final dashboard example: 2.996 V, 0.469 A, 1.404 W",
+        "9.70 mAh and 0.0292 Wh over a 103 s example session"
+      ],
+      "decision": "Power/Energy Monitor accepted as a completed subsystem."
+    },
+    {
+      "phase": "RC analyzer",
+      "work": "Built a 2N2222-controlled RC charge/discharge network using a 1000 uF capacitor and 1 kOhm paths. Added live OLED curves, 1/e crossing interpolation, capacitance calculation, dashboard traces, and result logging.",
+      "evidence": [
+        "Measured tau approximately 1.076-1.079 s",
+        "Calculated capacitance approximately 1076-1079 uF",
+        "Charge curve agreed with the 63.2% first-order checkpoint"
+      ],
+      "decision": "RC Analyzer accepted as a completed subsystem."
+    },
+    {
+      "phase": "Diode analyzer",
+      "work": "Added settled single-point diode measurement and a PWM-driven I-V visualization. Corrected an early method error by restricting classification to the settled DC result.",
+      "evidence": [
+        "1N4007 silicon example: Vf approximately 0.662 V at 7.09 mA from a 3.000 V source",
+        "1N5819 Schottky example: Vf approximately 0.248 V at 8.20 mA from a 2.954 V source",
+        "I-V sweep displays 15 points but is not used for quantitative classification"
+      ],
+      "decision": "Single-test classification is quantitative; PWM sweep is visualization-only until an analog source is validated."
+    },
+    {
+      "phase": "Unified instrument UI",
+      "work": "Combined Power, RC, Diode, MCU Temperature, and Source Test modes into one startup/menu workflow controlled by one active-low button.",
+      "evidence": [
+        "Short press navigates/pages; long press selects/returns",
+        "OLED screens and photographed menu/result pages verified"
+      ],
+      "decision": "Routine operation no longer depends on separate Thonny scripts."
+    },
+    {
+      "phase": "Wi-Fi dashboard",
+      "work": "Integrated Wi-Fi connection management, shared instrument state, HTTP serving, live status cards, power history, RC traces, diode results, source-test state, MCU telemetry, and logs.",
+      "evidence": [
+        "Dashboard connected and served on the local network",
+        "User verified all live panels and charts"
+      ],
+      "decision": "Networking/dashboard support treated as a completed subsystem."
+    },
+    {
+      "phase": "MCU temperature telemetry",
+      "work": "Read ADC4 with 16-sample averaging every five seconds when the instrument is in an active mode. Corrected TEMP_VREF to 3.24 V and exposed the reading to OLED/dashboard state.",
+      "evidence": [
+        "Stable readings approximately 45.53-45.68 C",
+        "ADC approximately 0.6739-0.6741 V, raw approximately 13630-13635"
+      ],
+      "decision": "Label as MCU/internal-die temperature, not ambient. Preserve the intentional pause in STARTUP and MENU."
+    },
+    {
+      "phase": "Experiment logging and export",
+      "work": "Added persistent completed-test summaries for power sessions, RC tests, diode single tests, diode I-V sweeps, source tests, and faults. Added dashboard history plus CSV/JSON downloads.",
+      "evidence": [
+        "Experiment table displays type, status, uptime, and summaries",
+        "Separate experiment/fault CSV and JSON export controls verified"
+      ],
+      "decision": "Logging/export accepted as a completed software subsystem."
+    },
+    {
+      "phase": "Guided Source Test",
+      "work": "Added manual capture of multiple INA219 V/I operating points and a reusable linear-fit backend for Voc, source resistance, and R^2.",
+      "evidence": [
+        "Point acceptance and duplicate rejection photographed",
+        "One three-point test returned Voc -0.003 V, Rs -6.395 ohm, R^2 1.000"
+      ],
+      "decision": "Retain mode as guided/manual. Flag negative resistance as invalid; add stronger capture workflow and fit validation before treating results as physical."
+    },
+    {
+      "phase": "Fault and threshold monitoring",
+      "work": "Added configurable software monitoring for undervoltage, overcurrent, excessive power, MCU temperature, and INA219 disconnect/restoration, with state transitions and event logging.",
+      "evidence": [
+        "System status dashboard verified",
+        "UNDERVOLTAGE_ACTIVE example appears in history"
+      ],
+      "decision": "State clearly that this is monitoring only; no hardware cutoff is presently installed."
+    },
+    {
+      "phase": "Final photographic/documentation capture",
+      "work": "Captured the full hardware setup, close-ups of the controller, RC section, switches, load resistor, harness, OLED workflows, dashboard charts, telemetry, and logs. Sanitized screen photos to remove laptop branding, browser chrome, bookmarks, tabs, and local IP information.",
+      "evidence": [
+        "26 sanitized photographs in the final appendix",
+        "Annotated overview, exact architecture diagram, and conceptual 3D visual prepared"
+      ],
+      "decision": "Use photos as engineering evidence with captions explaining what each image proves."
+    }
+  ],
+  "known_limitations": [
+    "Source Test can return a mathematically perfect but physically invalid negative source resistance when captured points or current direction do not represent the assumed V = Voc - I Rs model. Negative Rs must be rejected or clearly marked invalid.",
+    "The diode PWM I-V sweep averages a pulsed waveform and is display-only. Steady-DC single-test data remains the classification source.",
+    "MCU temperature is the RP2350 internal die temperature, not ambient temperature.",
+    "Fault monitoring is software monitoring and logging only; it does not provide a hardware safety cutoff.",
+    "High-current prototype wiring and clip/contact resistance remain measurable. Final construction should use robust low-resistance terminals/conductors.",
+    "Automated electronic load stepping is not yet implemented. Current Source Test is guided/manual until MOSFET/load-bank hardware is added.",
+    "Temperature sampling is intentionally deferred in STARTUP and MENU to avoid continuous background measurements when idle."
+  ],
+  "photos": [
+    {
+      "figure": 1,
+      "source_file": "image-1787893448668.jpg",
+      "file": "images/sanitized/01_image-1787893448668_sanitized.jpg",
+      "caption": "Overall prototype overview showing the complete Pico 2 W EE Lab Tool on the work mat, including the breadboard, external switch modules, OLED, and surrounding test wiring.",
+      "privacy_action": "none required",
+      "size_px": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "figure": 2,
+      "source_file": "image-1787893452363.jpg",
+      "file": "images/sanitized/02_image-1787893452363_sanitized.jpg",
+      "caption": "Close-up of the low-current breadboard test area, preserving component placement and jumper routing around the transistor/resistor network.",
+      "privacy_action": "none required",
+      "size_px": [
+        1152,
+        1536
+      ]
+    },
+    {
+      "figure": 3,
+      "source_file": "image-1787893461592.jpg",
+      "file": "images/sanitized/03_image-1787893461592_sanitized.jpg",
+      "caption": "RC analyzer section close-up showing the 1000 uF electrolytic capacitor, resistors, transistor, and ADC/control wiring.",
+      "privacy_action": "none required",
+      "size_px": [
+        1152,
+        1536
+      ]
+    },
+    {
+      "figure": 4,
+      "source_file": "image-1787893464888.jpg",
+      "file": "images/sanitized/04_image-1787893464888_sanitized.jpg",
+      "caption": "OLED RC Analyzer result screen documenting a successful measured time constant and capacitance result.",
+      "privacy_action": "none required",
+      "size_px": [
+        1152,
+        1536
+      ]
+    },
+    {
+      "figure": 5,
+      "source_file": "image-1787893467914.jpg",
+      "file": "images/sanitized/05_image-1787893467914_sanitized.jpg",
+      "caption": "Top-side close-up of the Pico 2 W, INA219/OLED interconnections, and dense shared-bus/control wiring.",
+      "privacy_action": "none required",
+      "size_px": [
+        1152,
+        1536
+      ]
+    },
+    {
+      "figure": 6,
+      "source_file": "image-1787893481899.jpg",
+      "file": "images/sanitized/06_image-1787893481899_sanitized.jpg",
+      "caption": "Raspberry Pi Pico 2 W controller close-up documenting the header connections used by the integrated instrument.",
+      "privacy_action": "none required",
+      "size_px": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "figure": 7,
+      "source_file": "image-1787893486860.jpg",
+      "file": "images/sanitized/07_image-1787893486860_sanitized.jpg",
+      "caption": "Manual ON/OFF switch modules and alligator-clip wiring used as physical circuit selectors/bypass elements during testing.",
+      "privacy_action": "none required",
+      "size_px": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "figure": 8,
+      "source_file": "image-1787893496016.jpg",
+      "file": "images/sanitized/08_image-1787893496016_sanitized.jpg",
+      "caption": "10 ohm, 100 W aluminum power resistor used as the principal high-current load.",
+      "privacy_action": "none required",
+      "size_px": [
+        1152,
+        1536
+      ]
+    },
+    {
+      "figure": 9,
+      "source_file": "image-1787893499406.jpg",
+      "file": "images/sanitized/09_image-1787893499406_sanitized.jpg",
+      "caption": "Screw-terminal power-harness breakout and multi-conductor wiring used for detachable source/load connections.",
+      "privacy_action": "none required",
+      "size_px": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "figure": 10,
+      "source_file": "image-1787893506140.jpg",
+      "file": "images/sanitized/10_image-1787893506140_sanitized.jpg",
+      "caption": "Sanitized dashboard overview showing MCU temperature, Wi-Fi status, threshold monitoring, live power, Power Monitor statistics, and RC Analyzer results.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1445,
+        940
+      ]
+    },
+    {
+      "figure": 11,
+      "source_file": "1000017942.jpg",
+      "file": "images/sanitized/11_1000017942_sanitized.jpg",
+      "caption": "OLED main-menu page showing the unified EE LAB TOOL interface and analyzer selection.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 12,
+      "source_file": "1000017943.jpg",
+      "file": "images/sanitized/12_1000017943_sanitized.jpg",
+      "caption": "OLED Source Test result screen. The photographed negative source-resistance result is retained as a validation issue, not accepted as a physical source model.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 13,
+      "source_file": "1000017944.jpg",
+      "file": "images/sanitized/13_1000017944_sanitized.jpg",
+      "caption": "OLED Point Capture confirmation with the measured voltage and current for an accepted source-test point.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 14,
+      "source_file": "1000017945.jpg",
+      "file": "images/sanitized/14_1000017945_sanitized.jpg",
+      "caption": "OLED duplicate-point rejection message demonstrating source-test data-quality screening.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 15,
+      "source_file": "1000017947.jpg",
+      "file": "images/sanitized/15_1000017947_sanitized.jpg",
+      "caption": "OLED I-V sweep visualization from the Diode Analyzer.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 16,
+      "source_file": "1000017946.jpg",
+      "file": "images/sanitized/16_1000017946_sanitized.jpg",
+      "caption": "OLED Source Test collection screen showing the current point count and short/long press controls.",
+      "privacy_action": "none required",
+      "size_px": [
+        864,
+        1536
+      ]
+    },
+    {
+      "figure": 17,
+      "source_file": "1000017940.jpg",
+      "file": "images/sanitized/17_1000017940_sanitized.jpg",
+      "caption": "OLED I-V sweep numerical/statistical page documenting the captured sweep summary.",
+      "privacy_action": "none required",
+      "size_px": [
+        865,
+        1536
+      ]
+    },
+    {
+      "figure": 18,
+      "source_file": "1000017941.jpg",
+      "file": "images/sanitized/18_1000017941_sanitized.jpg",
+      "caption": "OLED I-V sweep graph, alternate captured frame.",
+      "privacy_action": "none required",
+      "size_px": [
+        865,
+        1536
+      ]
+    },
+    {
+      "figure": 19,
+      "source_file": "1000017939.jpg",
+      "file": "images/sanitized/19_1000017939_sanitized.jpg",
+      "caption": "OLED I-V sweep graph, alternate captured frame preserving the displayed curve.",
+      "privacy_action": "none required",
+      "size_px": [
+        865,
+        1536
+      ]
+    },
+    {
+      "figure": 20,
+      "source_file": "1000017938.jpg",
+      "file": "images/sanitized/20_1000017938_sanitized.jpg",
+      "caption": "OLED I-V sweep statistics/graph frame documenting the embedded visualization workflow.",
+      "privacy_action": "none required",
+      "size_px": [
+        865,
+        1536
+      ]
+    },
+    {
+      "figure": 21,
+      "source_file": "image-1787893815724.jpg",
+      "file": "images/sanitized/21_image-1787893815724_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing live voltage/current/power, Power Monitor session statistics, RC Analyzer results, and the silicon-diode result.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1445,
+        900
+      ]
+    },
+    {
+      "figure": 22,
+      "source_file": "image-1787893821029.jpg",
+      "file": "images/sanitized/22_image-1787893821029_sanitized.jpg",
+      "caption": "Sanitized dashboard close-up showing the silicon-diode result and the three-point Source Test fit that produced a negative resistance and therefore requires validation.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        820,
+        1115
+      ]
+    },
+    {
+      "figure": 23,
+      "source_file": "image-1787893828096.jpg",
+      "file": "images/sanitized/23_image-1787893828096_sanitized.jpg",
+      "caption": "Sanitized dashboard charts showing recent voltage/current/power history and RC charge/discharge traces.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1485,
+        930
+      ]
+    },
+    {
+      "figure": 24,
+      "source_file": "image-1787893835341.jpg",
+      "file": "images/sanitized/24_image-1787893835341_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing RC traces, MCU internal-die temperature history, and experiment/fault export controls.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1325,
+        795
+      ]
+    },
+    {
+      "figure": 25,
+      "source_file": "image-1787893841248.jpg",
+      "file": "images/sanitized/25_image-1787893841248_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing MCU temperature history and the experiment-history table with CSV/JSON export controls.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1405,
+        825
+      ]
+    },
+    {
+      "figure": 26,
+      "source_file": "image-1787893852127.jpg",
+      "file": "images/sanitized/26_image-1787893852127_sanitized.jpg",
+      "caption": "Sanitized close-up of the experiment-history table and update timestamp.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_px": [
+        1120,
+        790
+      ]
+    }
+  ],
+  "documentation_policy": {
+    "preserve_failed_hypotheses": true,
+    "preserve_rejected_measurements": true,
+    "photo_caption_rule": "State what is visible and why the image mattered to diagnosis, validation, or reconstruction.",
+    "future_entry_fields": [
+      "date_or_stage",
+      "circuit_change",
+      "code_change",
+      "measured_values",
+      "expected_values_or_calculation",
+      "diagnosis_or_hypothesis",
+      "photos_and_significance",
+      "decision_or_next_step"
+    ]
+  }
+}

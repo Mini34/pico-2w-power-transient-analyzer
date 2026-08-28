@@ -1,0 +1,215 @@
+{
+  "generated_local_date": "2026-08-27",
+  "photo_count": 26,
+  "privacy_note": "Screen photographs were cropped to remove browser chrome, tabs, bookmarks, local IP information, and laptop branding.",
+  "photos": [
+    {
+      "figure": 1,
+      "path": "images/sanitized/01_image-1787893448668_sanitized.jpg",
+      "caption": "Overall prototype overview showing the complete Pico 2 W EE Lab Tool on the work mat, including the breadboard, external switch modules, OLED, and surrounding test wiring.",
+      "privacy_action": "none required",
+      "size_bytes": 344730,
+      "sha256": "3eb1f8529c2deec44521c56ffd8aa1df5d8b682e1ea5b9e17ff0335f53e5c8b1"
+    },
+    {
+      "figure": 2,
+      "path": "images/sanitized/02_image-1787893452363_sanitized.jpg",
+      "caption": "Close-up of the low-current breadboard test area, preserving component placement and jumper routing around the transistor/resistor network.",
+      "privacy_action": "none required",
+      "size_bytes": 195300,
+      "sha256": "7722d165c90ecf5442b12a033e021b51df380f788174677e3673e18d01cb4ba2"
+    },
+    {
+      "figure": 3,
+      "path": "images/sanitized/03_image-1787893461592_sanitized.jpg",
+      "caption": "RC analyzer section close-up showing the 1000 uF electrolytic capacitor, resistors, transistor, and ADC/control wiring.",
+      "privacy_action": "none required",
+      "size_bytes": 272503,
+      "sha256": "489bdfa401816eb0c3f6cb10099b7cb607ea848664eccd8ccc1c35c0671e92cb"
+    },
+    {
+      "figure": 4,
+      "path": "images/sanitized/04_image-1787893464888_sanitized.jpg",
+      "caption": "OLED RC Analyzer result screen documenting a successful measured time constant and capacitance result.",
+      "privacy_action": "none required",
+      "size_bytes": 290521,
+      "sha256": "e62a633ff96918b55895ea5520fe3b9dfa5e7a2ec4487a1b16948b75ecf57cc9"
+    },
+    {
+      "figure": 5,
+      "path": "images/sanitized/05_image-1787893467914_sanitized.jpg",
+      "caption": "Top-side close-up of the Pico 2 W, INA219/OLED interconnections, and dense shared-bus/control wiring.",
+      "privacy_action": "none required",
+      "size_bytes": 251668,
+      "sha256": "8fbc0fd95807f1b90ed97e4c7ac5f88ee08fd35c56e3d5db5522f4a23411e739"
+    },
+    {
+      "figure": 6,
+      "path": "images/sanitized/06_image-1787893481899_sanitized.jpg",
+      "caption": "Raspberry Pi Pico 2 W controller close-up documenting the header connections used by the integrated instrument.",
+      "privacy_action": "none required",
+      "size_bytes": 244643,
+      "sha256": "0de8a4b4726bd204315802dd23c9e41c49a5a9a63cf706200ec114c6a65990f5"
+    },
+    {
+      "figure": 7,
+      "path": "images/sanitized/07_image-1787893486860_sanitized.jpg",
+      "caption": "Manual ON/OFF switch modules and alligator-clip wiring used as physical circuit selectors/bypass elements during testing.",
+      "privacy_action": "none required",
+      "size_bytes": 305715,
+      "sha256": "e8d3b84920e0b571792fbc84cb36905b25ef83c359795b9ef2d76f4886b0f0c7"
+    },
+    {
+      "figure": 8,
+      "path": "images/sanitized/08_image-1787893496016_sanitized.jpg",
+      "caption": "10 ohm, 100 W aluminum power resistor used as the principal high-current load.",
+      "privacy_action": "none required",
+      "size_bytes": 188822,
+      "sha256": "e11c5f3e85aeaffaa10330fae64be91610a627763baebfbc47f53914fd84678b"
+    },
+    {
+      "figure": 9,
+      "path": "images/sanitized/09_image-1787893499406_sanitized.jpg",
+      "caption": "Screw-terminal power-harness breakout and multi-conductor wiring used for detachable source/load connections.",
+      "privacy_action": "none required",
+      "size_bytes": 301845,
+      "sha256": "120ceddc0c597d6eca77c43c18727326f78ca7c2f87018740df7159427334c43"
+    },
+    {
+      "figure": 10,
+      "path": "images/sanitized/10_image-1787893506140_sanitized.jpg",
+      "caption": "Sanitized dashboard overview showing MCU temperature, Wi-Fi status, threshold monitoring, live power, Power Monitor statistics, and RC Analyzer results.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 238505,
+      "sha256": "966960651c6540d349a16e8f633e20f0cd864e2b7a24852467d99998422f5ee3"
+    },
+    {
+      "figure": 11,
+      "path": "images/sanitized/11_1000017942_sanitized.jpg",
+      "caption": "OLED main-menu page showing the unified EE LAB TOOL interface and analyzer selection.",
+      "privacy_action": "none required",
+      "size_bytes": 351281,
+      "sha256": "8e3c9f11355d3d44d1704a1996f79da52ae9e80fe73030c7eb1b8a4069a28f68"
+    },
+    {
+      "figure": 12,
+      "path": "images/sanitized/12_1000017943_sanitized.jpg",
+      "caption": "OLED Source Test result screen. The photographed negative source-resistance result is retained as a validation issue, not accepted as a physical source model.",
+      "privacy_action": "none required",
+      "size_bytes": 344850,
+      "sha256": "353c40a0f522652c3e64594f195f8f61a33bbc925ce7e89a65bbb3d389f42eaa"
+    },
+    {
+      "figure": 13,
+      "path": "images/sanitized/13_1000017944_sanitized.jpg",
+      "caption": "OLED Point Capture confirmation with the measured voltage and current for an accepted source-test point.",
+      "privacy_action": "none required",
+      "size_bytes": 310148,
+      "sha256": "2ba645f35e81f2c7af2a910bc9e53595125b69a1e815c815bc81a46d35c9c0c1"
+    },
+    {
+      "figure": 14,
+      "path": "images/sanitized/14_1000017945_sanitized.jpg",
+      "caption": "OLED duplicate-point rejection message demonstrating source-test data-quality screening.",
+      "privacy_action": "none required",
+      "size_bytes": 327548,
+      "sha256": "d065c30abac0ce249b3af61b949f3f27d9f276b657c7615da8eeec5b46ffa6e1"
+    },
+    {
+      "figure": 15,
+      "path": "images/sanitized/15_1000017947_sanitized.jpg",
+      "caption": "OLED I-V sweep visualization from the Diode Analyzer.",
+      "privacy_action": "none required",
+      "size_bytes": 337740,
+      "sha256": "a73f28c3860eb49a45e430a531885affefb45534a68068787fb39c14cdda43d9"
+    },
+    {
+      "figure": 16,
+      "path": "images/sanitized/16_1000017946_sanitized.jpg",
+      "caption": "OLED Source Test collection screen showing the current point count and short/long press controls.",
+      "privacy_action": "none required",
+      "size_bytes": 305165,
+      "sha256": "0b41774398fbd44c8f048cad06c3308e954793dd40aa586446603174abde3c44"
+    },
+    {
+      "figure": 17,
+      "path": "images/sanitized/17_1000017940_sanitized.jpg",
+      "caption": "OLED I-V sweep numerical/statistical page documenting the captured sweep summary.",
+      "privacy_action": "none required",
+      "size_bytes": 368310,
+      "sha256": "01dac3e623b2adb432d9be100b7db35e5beef65730363d3eb2a4e2e6e788741a"
+    },
+    {
+      "figure": 18,
+      "path": "images/sanitized/18_1000017941_sanitized.jpg",
+      "caption": "OLED I-V sweep graph, alternate captured frame.",
+      "privacy_action": "none required",
+      "size_bytes": 417765,
+      "sha256": "05c8a3b344d913b31d79ae0603a9d133e69e16b815dcd65993c36478bbe0e3e9"
+    },
+    {
+      "figure": 19,
+      "path": "images/sanitized/19_1000017939_sanitized.jpg",
+      "caption": "OLED I-V sweep graph, alternate captured frame preserving the displayed curve.",
+      "privacy_action": "none required",
+      "size_bytes": 402310,
+      "sha256": "a6014b567e1c3ae2b41959f20fe136df3e4c0a7c3b6436ddd5e9cec74b2f4319"
+    },
+    {
+      "figure": 20,
+      "path": "images/sanitized/20_1000017938_sanitized.jpg",
+      "caption": "OLED I-V sweep statistics/graph frame documenting the embedded visualization workflow.",
+      "privacy_action": "none required",
+      "size_bytes": 255024,
+      "sha256": "7db38b7d14f793f984823b1d94cb89b45452b2815ef69601ae4831cb4111a903"
+    },
+    {
+      "figure": 21,
+      "path": "images/sanitized/21_image-1787893815724_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing live voltage/current/power, Power Monitor session statistics, RC Analyzer results, and the silicon-diode result.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 204168,
+      "sha256": "44697ad9afe9f3472dfc331a9e17ee43d2a780f4588ff524a572a7812272e4b4"
+    },
+    {
+      "figure": 22,
+      "path": "images/sanitized/22_image-1787893821029_sanitized.jpg",
+      "caption": "Sanitized dashboard close-up showing the silicon-diode result and the three-point Source Test fit that produced a negative resistance and therefore requires validation.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 108611,
+      "sha256": "c86310b6af566b607f0e0faf030cd01b2c45e4e85be0c042cd74a2e75dd648d3"
+    },
+    {
+      "figure": 23,
+      "path": "images/sanitized/23_image-1787893828096_sanitized.jpg",
+      "caption": "Sanitized dashboard charts showing recent voltage/current/power history and RC charge/discharge traces.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 214845,
+      "sha256": "eab00fe89d28312ea530225b06443a9e720fca6054d6dafbfc7ee6b99480e5de"
+    },
+    {
+      "figure": 24,
+      "path": "images/sanitized/24_image-1787893835341_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing RC traces, MCU internal-die temperature history, and experiment/fault export controls.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 123656,
+      "sha256": "897df071665e0e04e1217ed7d44e849dc71606b0639175d3bab4b0801dc22b48"
+    },
+    {
+      "figure": 25,
+      "path": "images/sanitized/25_image-1787893841248_sanitized.jpg",
+      "caption": "Sanitized dashboard view showing MCU temperature history and the experiment-history table with CSV/JSON export controls.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 161493,
+      "sha256": "783f2fc8c14b77fdf0eb83edbe2006952fe7b0161f147ad06a9a6328fcefeb4f"
+    },
+    {
+      "figure": 26,
+      "path": "images/sanitized/26_image-1787893852127_sanitized.jpg",
+      "caption": "Sanitized close-up of the experiment-history table and update timestamp.",
+      "privacy_action": "cropped to remove browser/laptop identifiers",
+      "size_bytes": 103468,
+      "sha256": "abaf0bf6191098393f38859af552b881aecc2209ad36aa198293c81efb4a6dec"
+    }
+  ]
+}
