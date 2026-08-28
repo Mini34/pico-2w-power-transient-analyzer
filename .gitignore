@@ -4,3 +4,11 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local credentials and device-generated data
+secrets.py
+wifi_config.py
+logs/
+*.jsonl
+*.mpy
+.thonny/
