@@ -1,21 +1,20 @@
-# Firmware export status
+# Firmware deployment
 
-The full device-tested MicroPython source files were not included in the initial project export. This folder is intentionally documentation-only until the exact scripts can be copied from the Raspberry Pi Pico 2 W or the Thonny development environment and checked against the current hardware.
+Copy the MicroPython modules in this directory to the root of the Raspberry Pi Pico 2 W filesystem. Keep the filenames unchanged so `main.py` can resolve its service imports.
 
-Planned files:
+Required project modules:
 
-- `power_monitor.py` — calibrated INA219 voltage/current/power acquisition, eight-sample averaging, OLED output, and raw serial diagnostics.
-- `rc_analyzer.py` — GP0 charge control, GP1/2N2222 discharge control, GP26/ADC0 acquisition, OLED plots, time-constant extraction, and capacitance estimation.
+- `main.py`
+- `instrument_state.py`
+- `wifi_manager.py`
+- `web_server.py`
+- `experiment_logger.py`
+- `fault_monitor.py`
+- `source_characterizer.py`
+- `ssd1306.py` (official generic MicroPython driver; see `THIRD_PARTY_NOTICES.md` for the pinned source and license)
 
-Documented configuration to preserve during export:
+For Wi-Fi, copy `secrets.example.py` to `secrets.py` on the device and fill in the local credentials there. Never commit `secrets.py`.
 
-```python
-V_SLOPE = 0.98896
-V_OFFSET = -0.03531
-SHUNT_OHMS = 0.1
-SAMPLES = 8
-```
+The integrated source files are syntax-checked in this repository. Hardware verification applies to the supplied working firmware snapshot. At the user's direction, `ssd1306.py` is a generic upstream replacement rather than an export of the file that was on the Pico, so this exact driver copy remains hardware-unverified. The additional Source Test validation is covered by host-side synthetic tests and should also be rechecked on the Pico before treating it as device-verified.
 
-The documented shared I2C bus uses GP6 for SDA and GP7 for SCL. The RC analyzer uses GP0 for charge control, GP1 for transistor base control, and GP26/ADC0 for capacitor-voltage measurement.
-
-Future firmware commits should state whether they were syntax-checked only or validated on the physical hardware.
+The software fault monitor records threshold events but is not an electrical protection device and does not disconnect the circuit.
