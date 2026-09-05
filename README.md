@@ -2,7 +2,9 @@
 
 A Raspberry Pi Pico 2 W electrical-engineering instrument that combines calibrated DC power/energy measurement, RC transient analysis, diode characterization, internal MCU temperature telemetry, guided source characterization, software fault monitoring, experiment logging, and a Wi-Fi dashboard.
 
-![Annotated final prototype](images/designs/01_annotated_prototype_overview.png)
+![Annotated prototype component overview](images/designs/01_annotated_prototype_overview.png)
+
+[Original photograph](images/sanitized/01_image-1787893448668_sanitized.jpg) · [Annotation review](docs/IMAGE_REVIEW.md). Callouts identify visible components, not electrical terminals.
 
 ## Current status
 
@@ -91,7 +93,8 @@ Do not commit Wi-Fi credentials. Keep local credential files ignored and provide
 - [`docs/PROJECT_LOG.json`](docs/PROJECT_LOG.json) - machine-readable project record.
 - [`docs/EE_Lab_Tool_Final_Project_Log.pdf`](docs/EE_Lab_Tool_Final_Project_Log.pdf) - final illustrated log.
 - [`docs/EE_Lab_Tool_Photo_Appendix_All_26.pdf`](docs/EE_Lab_Tool_Photo_Appendix_All_26.pdf) - complete sanitized photo set.
-- [`docs/EE_Lab_Tool_Design_Assets.pdf`](docs/EE_Lab_Tool_Design_Assets.pdf) - annotated overview, architecture, and conceptual visualizations.
+- [`docs/SYSTEM_ARCHITECTURE.md`](docs/SYSTEM_ARCHITECTURE.md) - firmware-grounded functional overview and measurement boundaries.
+- [`docs/IMAGE_REVIEW.md`](docs/IMAGE_REVIEW.md) - corrected annotations, original photo, and image accuracy review.
 - [`docs/CODEX_REPOSITORY_UPDATE_INSTRUCTIONS.md`](docs/CODEX_REPOSITORY_UPDATE_INSTRUCTIONS.md) - exact repository-update procedure.
 
 ## Important limitations

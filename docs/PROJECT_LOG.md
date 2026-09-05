@@ -8,10 +8,9 @@ The project began as a Raspberry Pi Pico 2 W and INA219 DC power monitor and dev
 The engineering record preserves failures as well as final results: defective INA219 screening, I2C recovery, grounding redesign, contact-resistance diagnosis, calibration outlier rejection, transistor pinout verification, RC node-isolation faults, a diode PWM-method correction, and an invalid negative source-resistance fit. These events are retained because they demonstrate the measurement reasoning that made the final system trustworthy.
 
 ![Annotated final prototype](../images/designs/01_annotated_prototype_overview.png)
-*Figure 1. Sanitized and annotated final prototype overview. The photograph is evidence of the integrated physical build; exact pin assignments and electrical limits are defined below.*
+*Figure 1. Annotated component overview, revised 4 September 2026. The [original photograph](../images/sanitized/01_image-1787893448668_sanitized.jpg) is the physical evidence. Callouts are explanatory, not terminal-level wiring instructions; exact pin assignments and electrical limits are defined below.*
 
-![Verified system architecture](../images/designs/02_verified_system_architecture.png)
-*Figure 2. Verified system architecture and pin map. The firmware uses SoftI2C at 50 kHz on GP6/GP7.*
+[Current system architecture and pin map](SYSTEM_ARCHITECTURE.md). The previous raster overview was retired on 4 September 2026 because its arrows mixed power paths with control relationships. The firmware uses SoftI2C at 50 kHz on GP6/GP7.
 
 ## Current capability status
 | Capability | Status | Notes |
