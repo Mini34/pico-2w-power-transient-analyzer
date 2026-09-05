@@ -8,8 +8,9 @@
 - [Individual one-page photo PDFs](individual_photo_pdfs/)
 - [Photo index](PHOTO_INDEX.md)
 - [Photo manifest](PHOTO_MANIFEST.json)
-- [Design assets](EE_Lab_Tool_Design_Assets.pdf)
+- [System architecture](SYSTEM_ARCHITECTURE.md)
+- [Image accuracy review](IMAGE_REVIEW.md)
 - [Codex repository-update brief](CODEX_REPOSITORY_UPDATE_INSTRUCTIONS.md)
 - [Repository update manifest](REPOSITORY_UPDATE_MANIFEST.md)
 
-The authoritative pin-map figure is `../images/designs/02_verified_system_architecture.png`. Files labeled conceptual or generated are supporting communication assets, not verified circuit diagrams.
+Use the current [system architecture](SYSTEM_ARCHITECTURE.md) and README pin map for implementation details. The original August export documents and manifests are historical records; their superseded generated visuals are not authoritative. See the image review for corrections.
