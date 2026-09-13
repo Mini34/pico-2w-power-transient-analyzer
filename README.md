@@ -2,9 +2,9 @@
 
 A Raspberry Pi Pico 2 W electrical-engineering instrument that combines calibrated DC power/energy measurement, RC transient analysis, diode characterization, internal MCU temperature telemetry, guided source characterization, software fault monitoring, experiment logging, and a Wi-Fi dashboard.
 
-![Annotated prototype component overview](images/designs/01_annotated_prototype_overview.png)
+![Conceptual Pico 2 W EE Lab Tool diagram labeling the Pico, INA219 sensor, OLED display, RC and diode test networks, bench supply, test load, and Wi-Fi dashboard](images/designs/02_pico_ee_lab_tool_conceptual_overview.webp)
 
-[Original photograph](images/sanitized/01_image-1787893448668_sanitized.jpg) · [Annotation review](docs/IMAGE_REVIEW.md). Callouts identify visible components, not electrical terminals.
+New image-generated, annotated component overview (13 September 2026). It is conceptual, not a wiring schematic, dashboard screenshot, or photograph of the validated build. [Annotated prototype photograph](images/designs/01_annotated_prototype_overview.png) · [Original photograph](images/sanitized/01_image-1787893448668_sanitized.jpg) · [Image accuracy review](docs/IMAGE_REVIEW.md).
 
 ## Current status
 

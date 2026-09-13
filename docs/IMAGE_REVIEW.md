@@ -2,6 +2,10 @@
 
 Scope: the public `images/designs/` assets in this repository and the corresponding portfolio imagery in `Mini34/signal-and-self`.
 
+## Conceptual component overview — 13 September 2026
+
+The new [image-generated overview](../images/designs/02_pico_ee_lab_tool_conceptual_overview.webp) labels the Pico 2 W, INA219 sensor, OLED display, RC and diode test networks, bench supply, test load, and Wi-Fi dashboard. It is an explanatory illustration, not a photograph, measured result, PCB layout, pin map, electrical wiring schematic, or dashboard screenshot. Its pictured components are stylized, and it deliberately shows no connections; consult [system architecture](SYSTEM_ARCHITECTURE.md) and the source photographs for documented signal and load-current paths. The earlier verified-photo annotation remains below as physical evidence. No new hardware test is claimed.
+
 ## Prototype overview
 
 The earlier overview placed several leader endpoints on the work mat, loose wiring, or beside the intended component. The revision uses the [original overview photograph](../images/sanitized/01_image-1787893448668_sanitized.jpg), checked against the [sensor/display close-up](../images/sanitized/05_image-1787893467914_sanitized.jpg) and [controller close-up](../images/sanitized/06_image-1787893481899_sanitized.jpg).
