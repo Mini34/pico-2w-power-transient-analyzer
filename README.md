@@ -2,9 +2,9 @@
 
 A Raspberry Pi Pico 2 W electrical-engineering instrument that combines calibrated DC power/energy measurement, RC transient analysis, diode characterization, internal MCU temperature telemetry, guided source characterization, software fault monitoring, experiment logging, and a Wi-Fi dashboard.
 
-![Conceptual Pico 2 W EE Lab Tool diagram labeling the Pico, INA219 sensor, OLED display, RC and diode test networks, bench supply, test load, and Wi-Fi dashboard](images/designs/02_pico_ee_lab_tool_conceptual_overview.webp)
+![Original Pico 2 W prototype photograph with callouts for the Pico, INA219, OLED, 1000 microfarad capacitor, and manual switch, plus original close-ups of the capacitor and 10 ohm load resistor](images/designs/02_annotated_physical_prototype.webp)
 
-New image-generated, annotated component overview (13 September 2026). It is conceptual, not a wiring schematic, dashboard screenshot, or photograph of the validated build. [Annotated prototype photograph](images/designs/01_annotated_prototype_overview.png) · [Original photograph](images/sanitized/01_image-1787893448668_sanitized.jpg) · [Image accuracy review](docs/IMAGE_REVIEW.md).
+Photo-faithful annotation of the physical build (13 September 2026). The two insets use original close-up photographs because the 10 Ω load is cropped in the overview and the 1000 µF capacitor is small there. Leader lines identify components, not terminals or wiring paths. [Original overview](images/sanitized/01_image-1787893448668_sanitized.jpg) · [Capacitor close-up](images/sanitized/03_image-1787893461592_sanitized.jpg) · [Load-resistor close-up](images/sanitized/08_image-1787893496016_sanitized.jpg) · [Image accuracy review](docs/IMAGE_REVIEW.md).
 
 ## Current status
 

@@ -2,9 +2,9 @@
 
 Scope: the public `images/designs/` assets in this repository and the corresponding portfolio imagery in `Mini34/signal-and-self`.
 
-## Conceptual component overview — 13 September 2026
+## Physical prototype annotation — 13 September 2026
 
-The new [image-generated overview](../images/designs/02_pico_ee_lab_tool_conceptual_overview.webp) labels the Pico 2 W, INA219 sensor, OLED display, RC and diode test networks, bench supply, test load, and Wi-Fi dashboard. It is an explanatory illustration, not a photograph, measured result, PCB layout, pin map, electrical wiring schematic, or dashboard screenshot. Its pictured components are stylized, and it deliberately shows no connections; consult [system architecture](SYSTEM_ARCHITECTURE.md) and the source photographs for documented signal and load-current paths. The earlier verified-photo annotation remains below as physical evidence. No new hardware test is claimed.
+The [new annotated photograph](../images/designs/02_annotated_physical_prototype.webp) keeps the [original overview](../images/sanitized/01_image-1787893448668_sanitized.jpg) as the main image. The 1000 µF capacitor is visible but small in that view, so an inset uses the [original RC close-up](../images/sanitized/03_image-1787893461592_sanitized.jpg). The 10 Ω, 100 W load resistor is cropped at the edge, so a second inset uses its [original close-up](../images/sanitized/08_image-1787893496016_sanitized.jpg). Every label points to the photographed component body, not to a terminal; no power or signal path is inferred. [The builder](../tools/build_physical_annotation.py) crops and resizes source photographs without resynthesizing hardware. This annotation is not a wiring schematic or a new hardware test.
 
 ## Prototype overview
 
@@ -18,6 +18,7 @@ The final overlay is deterministic, not an imagegen reconstruction. Two generate
 
 | Asset | Reason | Replacement |
 |---|---|---|
+| `02_pico_ee_lab_tool_conceptual_overview.webp` | A briefly published 3D-style diagram did not match the requested annotation of the actual prototype photograph. | [New physical-photo annotation](../images/designs/02_annotated_physical_prototype.webp). |
 | `02_verified_system_architecture.png` | Unlabelled arrows mixed the external load-power path with controller connections and placed software blocks on an electrical ground line. Several text lines ran outside their boxes. | [Functional architecture and pin map](SYSTEM_ARCHITECTURE.md), grounded in the checked-in firmware and project log. |
 | `04_generated_technical_brief_visual.png` | Reconstructed dashboard panels were presented as reference screenshots; its future-tense guard work and repository checklist were outdated. A small concept disclaimer did not resolve that ambiguity. | Original sanitized dashboard photographs, the current README, and firmware status notes. |
 | `05_generated_project_timeline_visual.png` | The 400 kHz label conflicts with the current 50 kHz bus; a diode example mixes the Vf/current units; the I-V sweep is described as verified without the display-only boundary. | Dated project log and current README measurement table. |
